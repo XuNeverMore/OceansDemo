@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.nevermore.oceansdemo.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_show"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.nevermore.oceans.widget.BottomTabLayout
+        android:id="@+id/btl"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize">
+
+        <com.nevermore.oceans.widget.BottomTabView
+            style="@style/blStyle"
+            app:tabText="我的"
+            app:tabIconNormal="@mipmap/ic_launcher"
+            app:tabIconSelected="@mipmap/ic_face" />
+
+        <com.nevermore.oceans.widget.BottomTabView
+            style="@style/blStyle"
+            app:tabText="我的"
+            app:tabIconNormal="@mipmap/ic_launcher"
+            app:tabIconSelected="@mipmap/ic_face" />
+
+        <com.nevermore.oceans.widget.BottomTabView
+            style="@style/blStyle"
+            app:tabText="我的"
+            app:tabIconNormal="@mipmap/ic_launcher"
+            app:tabIconSelected="@mipmap/ic_face" />
+
+    </com.nevermore.oceans.widget.BottomTabLayout>
+
+</LinearLayout>
