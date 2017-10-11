@@ -30,33 +30,21 @@ public class SuperObservableManager {
         return instance;
     }
 
-    /**
-     * 添加被观察者
-     * @param observableName
-     * @param superObservable
-     * @param <Observer>
-     *  利用泛型约束被观察者superObservable:
-     *  让其只受Observer类型的观察者观察
-     */
-    public <Observer> void  addObservable(Class<Observer> observableName,SuperObservable<Observer> superObservable){
-        if(mObservables.containsKey(observableName)){
-            throw new IllegalStateException("已添加过"+observableName.getSimpleName()+"类型的被观察者！");
-        }
-        mObservables.put(observableName,superObservable);
-    }
-
 
     /**
      * 获取被观察者
      * @param observableName
      * @return
      */
+    @Deprecated
     public <Observer> SuperObservable<Observer> getObservable(Class<Observer> observableName){
         SuperObservable<Observer> superObservable = mObservables.get(observableName);
 
         if(superObservable==null){
-            throw new IllegalStateException("未添加"+observableName.getSimpleName()+"类型的被观察者！");
+            superObservable = new SuperObservable<>();
+            mObservables.put(observableName,superObservable);
         }
+
         return superObservable;
     }
 
@@ -68,6 +56,34 @@ public class SuperObservableManager {
      */
     public SuperObservable removeObservable(Class observableName){
         return mObservables.remove(observableName);
+    }
+
+    /**
+     * 注册观察者
+     * @param clazz
+     * @param o
+     * @param <Observer>
+     */
+    public static <Observer> void registerObserver(Class<Observer> clazz,Observer o){
+        SuperObservable<Observer> observable = getInstance().getObservable(clazz);
+        observable.registerObserver(o);
+    }
+
+    /**
+     * 解除注册
+     * @param clazz
+     * @param o
+     * @param <Observer>
+     */
+    public static <Observer> void unregisterObserver(Class<Observer> clazz,Observer o){
+        SuperObservable<Observer> observable = getInstance().getObservable(clazz);
+        observable.unregisterObserver(o);
+    }
+
+
+    public static <Observer> void notify(Class<Observer> clazz,Dispatcher<Observer> dispatcher){
+        SuperObservable<Observer> observable = getInstance().getObservable(clazz);
+        observable.notifyMethod(dispatcher);
     }
 
 
